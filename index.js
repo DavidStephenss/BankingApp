@@ -1,40 +1,20 @@
-"use strict"
-
-const readline = require("linebyline")
-const { start } = require("repl")
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-})
-
 class Transaction {
   constructor(amount, payee) {
-    this.date = date()
+    this.date = new Date()
     this.amount = amount
     this.payee = payee
   }
 }
-
-const getPrompt = () => {
-  printStacks()
-  rl.question("start stack: ", (startStack) => {
-    rl.question("end stack: ", (endStack) => {
-      towersOfHanoi(startStack, endStack)
-      getPrompt()
-    })
-  })
-}
-
 class BankAccount {
-  constructor(accountnumber, owner) {
-    this.accountnumber = accountnumber
+  constructor(accountNumber, owner) {
+    this.accountNumber = accountNumber
     this.owner = owner
     this.transaction = []
   }
   balance() {
     let total = 0
-    for (let i = 0; i < this.transactions.length; i++) {
-      total + -this.transactions[i].amount
+    for (let i = 0; i < this.transaction.length; i++) {
+      total += this.transactions[i].amount
     }
     return total
   }
@@ -54,7 +34,7 @@ class BankAccount {
   }
 }
 class SavingsAccount extends BankAccount {
-  constructor(accountnumber, owner, interestRate) {
+  constructor(accountNumber, owner, interestRate) {
     super(accountNumber, owner)
     this.interestRate = interestRate
   }
@@ -66,18 +46,4 @@ class SavingsAccount extends BankAccount {
     this.transactions.push(interestTransaction)
   }
 }
-
-const bankAccount1 = new BankAccount("900-300-200", "bob dylan")
-console.log(bankAccount1.transaction.length)
-if (typeof describe === "function") {
-  describe("BankAccount", function () {
-    it("should be a number", function () {
-      const bankAccount1 = new BankAccount("900-300-200", "bob dylan")
-      assert.equal(bankAccount1.accountnumber, "900-300-200")
-      assert.equal(bankAccount1.name, "bob dylan")
-      assert.equal(bankAccount1.transaction.length, 0)
-    })
-  })
-}
-
 module.exports = { BankAccount, Transaction }
