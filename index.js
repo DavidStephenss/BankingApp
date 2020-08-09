@@ -33,17 +33,3 @@ class BankAccount {
     }
   }
 }
-class SavingsAccount extends BankAccount {
-  constructor(accountNumber, owner, interestRate) {
-    super(accountNumber, owner)
-    this.interestRate = interestRate
-  }
-
-  accrueInterest() {
-    const currentBalance = this.balance()
-    const intestAmt = currentBalance * this.interestRate
-    const interestTransaction = new Transaction(interestAmt, "Interest")
-    this.transactions.push(interestTransaction)
-  }
-}
-module.exports = { BankAccount, Transaction }
